@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="/css/index.css">
+<script src="/js/axios.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="calenderWrapper">
+    
+    <h2 style="text-decoration: underline;">Simple scheduler</h2>
+    <div class="dateTxt">
+        <div class="month-api">
+                <i class="fa fa-chevron-left" aria-hidden="true" data-direction="left"></i>
+        </div>
+        <div>
+            <h3 id = "currentYear">{{ lastDayOfMonth.getFullYear() }}</h3> 
+        </div>
+        <div>
+            <h3 id = "currentMonth">{{ lastDayOfMonth.getMonth()+1 }}</h3>
+        </div>
+        <div class="month-api">
+      
+                <i class="fa fa-chevron-right" aria-hidden="true"
+                data-direction="right"></i>
+                 
+        </div>
+    </div>
+    <div class="month">
+        <div class="dayAnnotation">
+                <div class="anno">월</div>
+                <div class="anno">화</div>
+                <div class="anno">수</div>
+                <div class="anno">목</div>
+                <div class="anno">금</div>
+                <div class="anno">토</div>
+                <div class="anno">일</div>
+        </div>
+        {% for i in range(0,4,1) %}
+            <div class="week">
+                    {% for j in range(1,8,1) %}
+                        <div class="day">
+                                <p class="dayTxt"><strong>{{ (i*7)+j }}</strong></p>
+                                <div>
+                                    <ul class="todoList">
+                                        <li class="todo"></li>
+                                    </ul>
+                                </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        {% endfor %}
+            <div class="week">
+                {% for i in range(29,lastDayOfMonth.getDate()+1,1) %}
+                    <div class="day">
+                            <p class="dayTxt"><strong>{{ i }}</strong></p>
+                            <div>
+                                <ul class="todoList">
+                                    <li class="todo"></li>
+                                </ul>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+<script src="/js/index.js"></script>
+{% endblock %}
+

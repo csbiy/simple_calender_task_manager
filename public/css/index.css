@@ -1,0 +1,62 @@
+.calenderWrapper {
+  margin-left: 250px;
+  margin-right: 250px;
+  text-align: center;
+}
+
+.calenderWrapper .dateTxt {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.calenderWrapper .dateTxt div {
+  margin-right: 10px;
+}
+
+.calenderWrapper .month {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.calenderWrapper .month .dayAnnotation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.calenderWrapper .month .dayAnnotation .anno {
+  width: calc(100%/7);
+  background-color: #d4fdef;
+  border-right: #fff;
+}
+
+.calenderWrapper .month .week {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid #ccc;
+}
+
+.calenderWrapper .month .week .day {
+  width: calc(100%/7);
+  height: 175px;
+  border: 1px solid #d1d4e4;
+  border-bottom: none;
+}
+
+.calenderWrapper .month .week .day:hover {
+  background-color: #9fb4ec;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.calenderWrapper .month .week .day:hover .dayTxt {
+  color: #fff;
+}
+/*# sourceMappingURL=index.css.map */
