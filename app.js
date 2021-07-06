@@ -2,24 +2,25 @@
 exports.__esModule = true;
 var express = require("express");
 var nunjucks = require("nunjucks");
+var dateScrollDto_1 = require("./model/dateScrollDto");
 var app = express();
-app.use(express.json());
 nunjucks.configure("views", {
     autoescape: true,
     express: app
 });
+app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.listen(process.env.port || 3000, function () {
     console.log("server executed ");
 });
 app.post("/month", function (req, res) {
+    var dateDto = new dateScrollDto_1.DateScrollDto(Number(req.body["year"]), Number(req.body["month"]), req.body["direction"]);
+    dateDto.changeMonthByDiection();
+    dateDto.setLastDayOfMonth();
+    res.json(dateDto);
 });
 app.get("/", function (req, res) {
-    var lastDayOfMonth = getLastDayOfMonth();
-    res.render("index.html", { lastDayOfMonth: lastDayOfMonth });
-});
-function getLastDayOfMonth() {
     var today = new Date();
-    var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    return lastDayOfMonth;
-}
+    var dateDto = new dateScrollDto_1.DateScrollDto(today.getFullYear(), today.getMonth() + 1, null);
+    res.render("index.html", { dateDto: dateDto });
+});
