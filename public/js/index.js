@@ -35,6 +35,12 @@ function createDay(dayNum){
     return wrapper;
 }
 
+days.forEach((day)=>{
+    day.addEventListener("click",function(){
+        window.open("../html/schedule.html","_blank","width:400,height:550")
+    })
+})
+
 monthBtn.forEach((btn) =>{ 
         btn.addEventListener("click",function(){
             const direction = this.firstElementChild.getAttribute("data-direction");
@@ -68,4 +74,3 @@ function updateMonthAndYear(dateDto) {
     currentYear.textContent = dateDto["year"];
     currentMonth.textContent = dateDto["month"];
 }
-

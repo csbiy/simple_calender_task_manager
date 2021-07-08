@@ -1,5 +1,5 @@
 node_modules
-public/css
+public/css/*
 model/*.js
 test/*.js
-*.js
+app.js
