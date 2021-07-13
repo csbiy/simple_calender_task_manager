@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateScrollDto = void 0;
 var DateScrollDto = /** @class */ (function () {
     function DateScrollDto(year, month, direction) {
@@ -42,26 +42,3 @@ var DateScrollDto = /** @class */ (function () {
     return DateScrollDto;
 }());
 exports.DateScrollDto = DateScrollDto;
-// function dateScrollDto(year : number,month : number ,direction : string)  {
-//     this.year = year;
-//     this.month = month;
-//     this.direction = direction;
-// }
-// dateScrollDto.prototype.getYear = function() :number{
-//     return this.year;
-// }
-// dateScrollDto.prototype.setYear = function(year : number) : void {
-//     this.year = year; 
-// }
-// dateScrollDto.prototype.getMonth = function() : number {
-//     return this.month;
-// }
-// dateScrollDto.prototype.setMonth = function(month : number) : void{
-//     this.month = month;
-// }
-// dateScrollDto.prototype.getDirection = function(): string{
-//     return this.direction ;
-// }
-// dateScrollDto.prototype.setDirection = function (direction : string ) : void { 
-//     this.direction = direction;
-// }

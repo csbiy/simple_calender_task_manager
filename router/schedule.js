@@ -1,8 +1,11 @@
 "use strict";
-exports.__esModule = true;
-var express_1 = require("express");
-var router = express_1.Router();
+Object.defineProperty(exports, "__esModule", { value: true });
+var express = require("express");
+var scheduleService = require("../service/scheduleService");
+var scheduleDto_1 = require("../model/scheduleDto");
+var router = express.Router();
 router.post("/", function (req, res) {
-    console.log(req.body);
+    var schedule = new scheduleDto_1.ScheduleDto(req.body, false);
+    scheduleService.addSchedule(schedule);
 });
-exports["default"] = router;
+exports.default = router;

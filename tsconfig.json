@@ -1,12 +1,8 @@
 {  
   "compilerOptions": {
-      "module": "system",
+      "module": "CommonJS",
       "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "outFile": "../../built/local/tsc.js",
-      "sourceMap": true,
-      "esModuleInterop": true,
+      "target": "es5"
     },
   "include": [
       "**/*"

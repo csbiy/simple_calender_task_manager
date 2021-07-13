@@ -49,30 +49,4 @@ export class DateScrollDto  {
         this.lastDayOfMonth = tmp.getDate();
     }
 }
-// function dateScrollDto(year : number,month : number ,direction : string)  {
-//     this.year = year;
-//     this.month = month;
-//     this.direction = direction;
-// }
-// dateScrollDto.prototype.getYear = function() :number{
-//     return this.year;
-// }
-// dateScrollDto.prototype.setYear = function(year : number) : void {
-//     this.year = year; 
-// }
 
-// dateScrollDto.prototype.getMonth = function() : number {
-//     return this.month;
-// }
-
-// dateScrollDto.prototype.setMonth = function(month : number) : void{
-//     this.month = month;
-// }
-
-// dateScrollDto.prototype.getDirection = function(): string{
-//     return this.direction ;
-// }
-
-// dateScrollDto.prototype.setDirection = function (direction : string ) : void { 
-//     this.direction = direction;
-// }

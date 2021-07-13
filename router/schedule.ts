@@ -1,7 +1,10 @@
-import express, { Router } from "express"
-const router: Router = Router()
+import * as express from "express"
+import * as scheduleService from "../service/scheduleService";
+import { ScheduleDto } from "../model/scheduleDto";
+const router = express.Router();
 router.post("/",(req : express.Request , res: express.Response)=>{
-    console.log(req.body);
+    let schedule :ScheduleDto  = new ScheduleDto(req.body,false);
+    scheduleService.addSchedule(schedule);
 })
     
 

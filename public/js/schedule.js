@@ -1,4 +1,5 @@
 
+submitBtn = document.querySelector("#submitBtn");
 time = document.querySelectorAll(".time");
 time.forEach((wrapper)=>{
     for (let  i = 0; i<24; i+=0.5){
@@ -13,3 +14,5 @@ time.forEach((wrapper)=>{
         wrapper.appendChild(option)
     }
 })
+
+submitBtn.addEventListener("click",()=>window.close());
