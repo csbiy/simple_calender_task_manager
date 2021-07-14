@@ -10,7 +10,6 @@ CREATE TABLE `user` (
   `day` tinyint NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime DEFAULT NULL,
-  `gender` char(1) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `user_chk_1` CHECK ((`gender` in (_utf8mb4'M',_utf8mb4'F')))
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

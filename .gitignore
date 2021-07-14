@@ -2,7 +2,7 @@ node_modules
 public/css/*
 model/*.js
 test/*.js
-app.js
+*.js
 service/*.js
 repository/*.js
 db/*.js

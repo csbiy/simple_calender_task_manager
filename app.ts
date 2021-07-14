@@ -1,7 +1,8 @@
 import * as express from "express";
 import * as nunjucks from "nunjucks";
 import {DateScrollDto} from "./model/dateScrollDto";
-import schedule  from "./router/schedule";
+import schedule from "./router/schedule";
+import user from "./router/user"
 require("dotenv").config();
 const app :express.Application =  express();
 nunjucks.configure("views",{ 
@@ -11,8 +12,8 @@ nunjucks.configure("views",{
 app.use(express.urlencoded())
 app.use(express.json());
 app.use(express.static(__dirname+"/public"));
+app.use("/user",user);
 app.use("/schedule",schedule);
-app.use("/member",member);
 app.listen( process.env.PORT ,()=>{
     console.log("server executed on" + process.env.PORT);
 })

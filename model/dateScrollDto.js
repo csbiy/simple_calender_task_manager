@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateScrollDto = void 0;
+var Direction_1 = require("./enum/Direction");
 var DateScrollDto = /** @class */ (function () {
     function DateScrollDto(year, month, direction) {
         this.year = year;
@@ -20,14 +21,14 @@ var DateScrollDto = /** @class */ (function () {
         return this.direction;
     };
     DateScrollDto.prototype.changeMonthByDirection = function () {
-        if (this.direction == "right") {
+        if (this.direction == Direction_1.Direction.right) {
             this.month += 1;
             if (this.month > 12) {
                 this.year += 1;
                 this.month = 1;
             }
         }
-        else {
+        else if (this.direction == Direction_1.Direction.left) {
             this.month -= 1;
             if (this.month < 1) {
                 this.year -= 1;

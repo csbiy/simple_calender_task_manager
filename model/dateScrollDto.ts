@@ -1,3 +1,4 @@
+import { Direction } from "./enum/Direction";
 
 
 export class DateScrollDto  {
@@ -5,9 +6,9 @@ export class DateScrollDto  {
     private year:number;
     private month:number;
     private lastDayOfMonth:number;
-    private direction:string;
+    private direction:Direction;
 
-    constructor(year:number,month:number,direction:string ){
+    constructor(year:number,month:number,direction:Direction ){
         this.year = year;
         this.month = month;
         this.direction = direction ; 
@@ -27,14 +28,14 @@ export class DateScrollDto  {
         return this.direction;
     }
     public changeMonthByDirection() : void {
-        if(this.direction == "right"){
+        if(this.direction == Direction.right){
             this.month+=1;
             if(this.month>12){
                 this.year+=1;
                 this.month=1;
             }
         }
-        else{
+        else if(this.direction ==  Direction.left){
             this.month-=1;
             if(this.month<1){
                 this.year-=1
