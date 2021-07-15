@@ -8,14 +8,13 @@ export class UserDto{
     private _month:number;
     private _day:number;
 
-    constructor(requestBody : {emailId : string, email:string ,name : string, password : string , year:number, month:number,day:number;
-    }){
+    constructor(requestBody : {emailId : string, email:string ,name : string, password : string , year:string, month:string,day:string;}){
         this._email = requestBody['emailId'] + requestBody['email'];
         this._name = requestBody['name'];
         this._password = requestBody['password'];
-        this._year = requestBody['year'];
-        this._month = requestBody['month'];
-        this._day = requestBody['day'];   
+        this._year = parseInt(requestBody['year']);
+        this._month = parseInt(requestBody['month']);
+        this._day = parseInt(requestBody['day']);   
     }
     toString(){
         return `User( name:${this._name} / birth:${this._year + "/" + this._month + "/" + this._day})`;

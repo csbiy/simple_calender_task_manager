@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-  <form method="POST" action="/schedule"
+  <form method="POST" action="/user"
   class="gy-2 gx-3 w-25 position-fixed" style="top: 50%; left:50% ; transform: translate(-50%,-50%); box-shadow: 5px 5px 5px #ccc; padding:50px 50px">
   <h3>Registration</h3>
       <div class="form-row align-items-center d-flex w-100">
@@ -38,7 +38,7 @@
         </div>
         <div class="form-group mt-2">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         </div>
         <div class="form-group mt-2">
           <label for="rePassword">Re-Password</label>
@@ -48,22 +48,22 @@
           <h6>생년월일</h6>
         </div>
         <div class="d-flex">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Year</option>
+          <select class="form-select" aria-label="Default select example" name="year">
+            <option selected value="null">Year</option>
           {% for i in range(1950,2030,1) %}
-              <option>{{i}}</option>
+              <option value="{{i}}">{{i}}</option>
           {% endfor %}
           </select>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Month</option>
+          <select class="form-select" aria-label="Default select example" name="month">
+            <option selected value="null">Month</option>
             {% for i in range(1,13,1) %}
-            <option>{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
         {% endfor %}
           </select>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Day</option>
+          <select class="form-select" aria-label="Default select example" name="day">
+            <option selected value="null">Day</option>
             {% for i in range(1,31,1) %}
-            <option>{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
         {% endfor %}
           </select>
         </div>

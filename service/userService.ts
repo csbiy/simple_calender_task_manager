@@ -12,6 +12,4 @@ async function encryptPassword(user: UserDto) {
     user.password = encryptedPw;
 }
 
-
 export {addUser}
-

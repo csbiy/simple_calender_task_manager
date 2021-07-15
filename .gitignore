@@ -1,5 +1,7 @@
 node_modules
 public/css/*
+public/js/*.js
+public/html/*.html
 model/*.js
 test/*.js
 *.js
@@ -7,3 +9,4 @@ service/*.js
 repository/*.js
 db/*.js
 .env
+app.js
