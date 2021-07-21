@@ -1,4 +1,4 @@
-class UserException{
+class UserException extends Error{ 
 
     protected _message : string;
     protected _name : string;

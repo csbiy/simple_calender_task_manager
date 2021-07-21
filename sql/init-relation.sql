@@ -5,13 +5,12 @@ CREATE TABLE `user` (
   `email` varchar(200) NOT NULL,
   `name` varchar(10) NOT NULL,
   `password` varchar(500) NOT NULL,
-   `year` smallint NOT NULL,
-  `month` tinyint NOT NULL,
-  `day` tinyint NOT NULL,
+   `year` smallint default NULL,
+  `month` tinyint default NULL,
+  `day` tinyint default NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  CONSTRAINT `user_chk_1` CHECK ((`gender` in (_utf8mb4'M',_utf8mb4'F')))
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 drop table if exists schedule;
 -- 일정테이블 

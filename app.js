@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var express = require("express");
 var nunjucks = require("nunjucks");
 var dateScrollDto_1 = require("./model/dateScrollDto");
@@ -14,8 +14,8 @@ nunjucks.configure("views", {
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
-app.use("/user", user_1.default);
-app.use("/schedule", schedule_1.default);
+app.use("/user", user_1["default"]);
+app.use("/schedule", schedule_1["default"]);
 app.listen(process.env.PORT, function () {
     console.log("server executed on" + process.env.PORT);
 });

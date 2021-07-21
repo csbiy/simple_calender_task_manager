@@ -1,12 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.DateScrollDto = void 0;
 var Direction_1 = require("./enum/Direction");
 var DateScrollDto = /** @class */ (function () {
     function DateScrollDto(year, month, direction) {
         this.year = year;
         this.month = month;
-        this.direction = direction;
+        if (direction == Direction_1.Direction.left) {
+            this.direction = Direction_1.Direction.left;
+        }
+        else {
+            this.direction = Direction_1.Direction.right;
+        }
     }
     DateScrollDto.prototype.getLastDayOfMonth = function () {
         return this.lastDayOfMonth;

@@ -10,12 +10,15 @@ const router : Router= express.Router()
 router.get("/",(req:express.Request , res:express.Response) =>{
     res.render("registration.html");
 })
+router.post("/email",(req:express.Request , res: express.Response)=>{;
+    userService.isNotDuplicateEmail(req.body["email"])
+        .then((isNotDuplicate)=> res.json( {isNotDuplicate : isNotDuplicate} ))
+})
 
 router.post("/",(req:express.Request, res:express.Response) =>{ 
     userService.addUser(new UserDto(req.body));
     res.render("index.html");
 })
-
 
 
 

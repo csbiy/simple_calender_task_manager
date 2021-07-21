@@ -1,15 +1,9 @@
 import * as bcrypt from "bcrypt"
 import {UserDto} from "../model/userDto";
 import * as userRepository from "../repository/userRepository";
-import { DuplicateEmailException } from "../model/exception/UserException";
 
-const addUser = async function(user : UserDto) :Promise<DuplicateEmailException | undefined> {
-    const isDuplicateEmail :boolean= await isNotDuplicateEmail(user.email);
-    if(isDuplicateEmail){
-        await encryptPassword(user);
+const addUser = async function(user : UserDto) :Promise<boolean>{
         return userRepository.addUser(user);
-    }
-    return new DuplicateEmailException();
 }
 
 async function encryptPassword(user: UserDto) {

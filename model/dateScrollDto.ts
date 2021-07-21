@@ -8,10 +8,14 @@ export class DateScrollDto  {
     private lastDayOfMonth:number;
     private direction:Direction;
 
-    constructor(year:number,month:number,direction:Direction ){
+    constructor(year:number,month:number,direction:string ){
         this.year = year;
         this.month = month;
-        this.direction = direction ; 
+        if(direction==Direction.left){
+            this.direction = Direction.left;
+        }else{
+            this.direction = Direction.right;
+        }
     }
 
     public getLastDayOfMonth() : number {

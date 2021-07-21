@@ -1,13 +1,15 @@
 
+const emailCheckBtn = document.querySelector("#emailCheckBtn") as HTMLButtonElement;
+const emailDoman = document.querySelector("#email") as HTMLInputElement;
+const emailId = document.querySelector("#emailId") as HTMLInputElement;
 const password  = document.querySelector("#password") as HTMLInputElement;
 const rePassword  = document.querySelector("#rePassword") as HTMLInputElement;
 const submitBtn  = document.querySelector("#submitBtn") as HTMLButtonElement;
-/***
- * problem in logic 
- */
+
 function isSamePassword(pw1: HTMLInputElement ,pw2:HTMLInputElement) : boolean{
     return pw1.value == pw2.value;
 }
+
 function displayPwStatus() : void{
     rePassword.addEventListener("keyup",()=>{
         if(isSamePassword(password,rePassword)){
@@ -22,6 +24,26 @@ function displayPwStatus() : void{
         }    
 })};
 
+function isDuplicateEmail(){
+    /***
+     * todo
+     */
+    emailCheckBtn.addEventListener("click",()=>{        
+        console.log("test")
+        axios({
+            method: "POST",
+            url: "/user/email",
+            data:{
+                email: `${emailId.value}@${emailDoman.value}`,
+            }
+        })
+            .then((rs)=>{
+                if(rs.data['isDuplicate']){
+                    emailId.classList.add("is-invalid");
+                }
+            })
+    });
+}
 
-
+isDuplicateEmail();
 displayPwStatus();

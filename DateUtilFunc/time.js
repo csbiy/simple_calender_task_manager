@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.toMySQLdatetime = exports.getTime = void 0;
 function getTime(date) {
     return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();

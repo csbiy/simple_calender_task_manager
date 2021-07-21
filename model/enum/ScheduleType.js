@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.ScheduleType = void 0;
 var ScheduleType;
 (function (ScheduleType) {

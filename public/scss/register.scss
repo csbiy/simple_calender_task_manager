@@ -1,0 +1,18 @@
+
+#registrationForm{
+    top: 50%; 
+    left:50% ; 
+    transform: translate(-50%,-50%); 
+    box-shadow: 5px 5px 5px #ccc; 
+    padding:50px 50px
+}
+.emailCheck{
+    padding-bottom: 15px;   
+    margin-left: 20px;
+}
+
+#submitBtn{
+    left:50%; 
+    top:50%; 
+    transform:translate(-50%,-50%)
+}
