@@ -15,7 +15,7 @@ app.use(express.static(__dirname+"/public"));
 app.use("/user",user);
 app.use("/schedule",schedule);
 app.listen( process.env.PORT ,()=>{
-    console.log("server executed on" + process.env.PORT);
+    console.log("server executed on " + process.env.PORT);
 })
 
 app.post("/month",( req:express.Request, res: express.Response )=>{

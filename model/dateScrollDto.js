@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateScrollDto = void 0;
 var Direction_1 = require("./enum/Direction");
 var DateScrollDto = /** @class */ (function () {
