@@ -7,9 +7,7 @@ var passport_1 = require("passport");
 var dateScrollDto_1 = require("./model/dateScrollDto");
 var schedule_1 = require("./router/schedule");
 var user_1 = require("./router/user");
-/***
- *  to class Syntax
- */
+
 var app = express();
 dotenv.config();
 nunjucks_1.default.configure("views", {

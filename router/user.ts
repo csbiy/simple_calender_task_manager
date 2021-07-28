@@ -4,26 +4,24 @@ import { Router } from "express-serve-static-core";
 import { DuplicateEmailException } from "../model/exception/UserException";
 import { UserDto } from "../model/userDto";
 import * as userService from "../service/userService";
+import { isLoggedIn,isNotLoggedIn } from "./login";
 
 const router : Router= express.Router()
 
 
-router.get("/",(req:express.Request , res:express.Response) =>{
+router.get("/",isNotLoggedIn,(req:express.Request , res:express.Response) =>{
     res.render("registration.html");
 })
 
-router.post("/email",(req:express.Request , res: express.Response)=>{;
+router.post("/email",isNotLoggedIn,(req:express.Request , res: express.Response)=>{;
     userService.isNotDuplicateEmail(req.body["email"])
         .then((isNotDuplicate)=> res.json( {isNotDuplicate : isNotDuplicate} ))
 })
 
-router.post("/",(req:express.Request, res:express.Response) =>{ 
+router.post("/",isNotLoggedIn,(req:express.Request, res:express.Response) =>{ 
     userService.addUser(new UserDto(req.body));
     res.redirect("/");
 })
 
-router.post("/login",(req:express.Request,res:express.Response)=>{
-    
-})
 
 export default router;

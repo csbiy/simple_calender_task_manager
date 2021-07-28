@@ -1,6 +1,7 @@
 import { UserDto } from "../model/userDto";
 import {connectionPool} from "../db/db_config";
 import {toMySQLdatetime} from "../DateUtilFunc/time";
+import { rejects } from "assert";
 
 
 const addUser = function(user: UserDto) :Promise<boolean> {
@@ -27,6 +28,7 @@ const FindByEmail = function(email: string) :Promise<number>{
         })
     })
 }
+
 
 export {addUser , FindByEmail};
 
