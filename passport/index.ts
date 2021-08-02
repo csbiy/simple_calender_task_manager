@@ -1,9 +1,7 @@
 import * as passport from "passport"
-import * as local from "passport-local";
-import * as kakao from "passport-kakao";
 import { UserDto } from "../model/userDto";
 import * as userRepository from "../repository/userRepository";
-module.exports = ()=>{
+const passportConfig = ()=>{
     // login 시 실행되어 session 에 어떤 Data를 저장할지 정하는 method 
     passport.serializeUser((userDto: UserDto ,done)=>{
         done(null,userDto.email);    
@@ -16,4 +14,6 @@ passport.deserializeUser((id :string,done)=>{
         .catch(err=>done(err));
 });
 
+
 }
+export { passportConfig };

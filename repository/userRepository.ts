@@ -20,7 +20,7 @@ const addUser = function(user: UserDto) :Promise<boolean> {
     })
 }
 
-const FindByEmail = function(email: string) :Promise<number>{
+const FindUserNumByEmail = function(email: string) :Promise<number>{
     return new Promise((resolve,reject)=>{
         connectionPool.query(`select count(*) as emailNum from user where email = '${email}'`,(err,res,fields)=>{
             if(err) throw err;
@@ -30,5 +30,24 @@ const FindByEmail = function(email: string) :Promise<number>{
 }
 
 
-export {addUser , FindByEmail};
+const FindByEmail = function(email : string) :Promise<UserDto>{
+    return new Promise((resolve,rejects)=>{
+        connectionPool.query(`select name,password,year,month,day from user where email='${email}'`,(err,res,fields)=>{
+            if(err) throw err;
+            const foundUser :UserDto =UserDto.createUser(res[0]);
+            return resolve(foundUser);
+        })
+    })
+}
+
+const DeleteUserByEmail = function(email: string) :Promise<boolean>{
+    return new Promise((resolve,reject)=>{
+        connectionPool.query(`delete from user where email='${email}'`,(err,res,fields)=>{
+            if(err) throw err;
+            return resolve(true);
+        })
+    })   
+}
+
+export {addUser , FindUserNumByEmail ,FindByEmail ,DeleteUserByEmail };
 

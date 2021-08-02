@@ -12,7 +12,7 @@ async function encryptPassword(user: UserDto) {
 }
 
 const isNotDuplicateEmail = async function(userEmail :string ) :Promise<boolean>{
-    const foundEmail :number = await userRepository.FindByEmail(userEmail);
+    const foundEmail :number = await userRepository.FindUserNumByEmail(userEmail);
     if(foundEmail >= 2){
         return false;
     }

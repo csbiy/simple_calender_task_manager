@@ -1,19 +1,45 @@
-import * as dotenv from "dotenv";
-import * as express from "express";
-import * as nunjucks from "nunjucks";
-import * as passport  from "passport";
-import * as session from "express-session";
-import {DateScrollDto} from "./model/dateScrollDto";
-import schedule from "./router/schedule";
-import user from "./router/user"
+import * as dotenv          from "dotenv";
+import * as express         from "express";
+import * as nunjucks        from "nunjucks";
+import * as passport        from "passport";
+import * as session         from "express-session";
+import {DateScrollDto}      from "./model/dateScrollDto";
+import schedule             from "./router/schedule";
+import user                 from "./router/user"
+import {login}              from "./router/auth";
+import {passportConfig}     from  "./passport/index";
+import   { Strategy as localStrategy }  from "passport-local";
+import * as userRepository              from "./repository/userRepository";
+import {compareSync}                    from "bcrypt";
+import {UserDto}                        from "./model/userDto";
 
 
-/***
- *  to class Syntax
- */
+dotenv.config();    
 const app :express.Application =  express();
 
-dotenv.config();
+passport.use(new localStrategy({
+    usernameField : 'email',
+    passwordField:'password',
+},async(email,password,done)=>{
+    try{
+        const exUser :UserDto= await userRepository.FindByEmail(email);
+        if(exUser){
+             const result :boolean = await compareSync(password,exUser.password);
+             if(result){
+                    done(null,exUser);
+             }else{
+                 done(null,false,{message:"비밀번호가 일치하지 않습니다."});
+             }
+        }else{
+            done(null,false,{message:"아이디와 일치하는 회원이 없습니다."});
+        }
+    }catch(error){
+        console.log(error);
+        done(error);
+    }
+}))
+
+passportConfig();
 nunjucks.configure("views",{ 
     autoescape: true,
     express : app
@@ -27,15 +53,17 @@ app.use(session({
     secret:process.env.SECRET_KEY,
     cookie:{
         httpOnly:true,
-        secure:false,
+        secure: false,
     }
 }))
+
+app.use("/auth",login);
+app.use("/user",user);
+app.use("/schedule",schedule);
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use("/user",user);
-app.use("/schedule",schedule);
 app.listen( process.env.PORT ,()=>{
     console.log("server executed on " + process.env.PORT);
 })

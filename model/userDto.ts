@@ -9,12 +9,17 @@ export class UserDto{
     private _day:number;
 
     constructor(requestBody : {emailId : string, email:string ,name : string, password : string , year:string, month:string,day:string;}){
-        this._email = requestBody['emailId'] + requestBody['email'];
+        this._email = requestBody['emailId'] + "@" + requestBody['email'];
         this._name = requestBody['name'];
         this._password = requestBody['password'];
         this._year = parseInt(requestBody['year']);
         this._month = parseInt(requestBody['month']);
         this._day = parseInt(requestBody['day']);   
+    }
+    public static createUser(rowPacket : {name : string, password : string , year:string, month:string,day:string , [key:string]:any }) : UserDto{
+        rowPacket['emailId'] = null;
+        rowPacket['email'] = null;
+        return new this(rowPacket as {emailId : string, email:string ,name : string, password : string , year:string, month:string,day:string;});
     }
     toString(){
         return `User( name:${this._name} / birth:${this._year + "/" + this._month + "/" + this._day})`;

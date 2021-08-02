@@ -4,7 +4,7 @@ import { Router } from "express-serve-static-core";
 import { DuplicateEmailException } from "../model/exception/UserException";
 import { UserDto } from "../model/userDto";
 import * as userService from "../service/userService";
-import { isLoggedIn,isNotLoggedIn } from "./login";
+import { isLoggedIn,isNotLoggedIn } from "./auth";
 
 const router : Router= express.Router()
 

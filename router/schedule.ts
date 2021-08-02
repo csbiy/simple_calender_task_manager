@@ -2,7 +2,7 @@ import * as express from "express"
 import * as scheduleService from "../service/scheduleService";
 import { ScheduleDto } from "../model/scheduleDto";
 import { Router } from "express-serve-static-core";
-import {isLoggedIn} from "./login";
+import {isLoggedIn} from "./auth";
 
 const router: Router = express.Router();
 

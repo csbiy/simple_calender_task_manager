@@ -4,7 +4,7 @@
   "description": "commento ",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./test/**/*.js",
+    "test": "mocha ./test/**/*.js --timeout 2000 --exclude ./test/client/*",
     "start": "nodemon app.js"
   },
   "author": "chansoo",
