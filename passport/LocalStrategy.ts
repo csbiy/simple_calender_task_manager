@@ -4,7 +4,7 @@ import {compareSync} from "bcrypt";
 import {UserDto} from "../model/userDto";
 import * as userRepository from "../repository/userRepository";
 
-module.exports = ()=>{
+const passportLocalstrategy = ()=>{
     passport.use(new localStrategy({
         usernameField : 'email',
         passwordField:'password',
@@ -12,7 +12,7 @@ module.exports = ()=>{
         try{
             const exUser :UserDto= await userRepository.FindByEmail(email);
             if(exUser){
-                 const result :boolean = await compareSync(password,exUser.password);
+                 const result :boolean =  compareSync(password,exUser.password);
                  if(result){
                         done(null,exUser);
                  }else{
@@ -26,4 +26,7 @@ module.exports = ()=>{
             done(error);
         }
     }))
-}
+};
+
+
+export { passportLocalstrategy }

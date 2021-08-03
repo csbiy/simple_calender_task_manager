@@ -34,8 +34,12 @@ const FindByEmail = function(email : string) :Promise<UserDto>{
     return new Promise((resolve,rejects)=>{
         connectionPool.query(`select name,password,year,month,day from user where email='${email}'`,(err,res,fields)=>{
             if(err) throw err;
-            const foundUser :UserDto =UserDto.createUser(res[0]);
-            return resolve(foundUser);
+            if(res[0]){
+                const foundUser :UserDto =UserDto.createUser(res[0]);
+                return resolve(foundUser);
+            }else{
+                return resolve(null);
+            }
         })
     })
 }

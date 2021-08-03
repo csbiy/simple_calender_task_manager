@@ -15,18 +15,19 @@ const isLoggedIn  = (req : express.Request,res : express.Response,next:express.N
 }
 // login 중이면 isAutehnticated method는 true
 const isNotLoggedIn = (req:express.Request , res:express.Response,next:express.NextFunction) =>{
-    if(!req.isAuthenticated()){
+    if(req.isAuthenticated()){
         const message = encodeURIComponent("login 한 상태입니다.");
         res.redirect(`/?error=${message}`);
     }
+    next();
 }
 
-router.get("/login",(req :express.Request ,res:express.Response,next:express.NextFunction)=>{
+router.get("/login",isNotLoggedIn,(req :express.Request ,res:express.Response,next:express.NextFunction)=>{
     console.log("request")
     res.sendFile(resolve(__dirname+"/../public/html/login.html"));
 })
 
-router.post("/login",(req:express.Request,res:express.Response,next:express.NextFunction)=>{
+router.post("/login",isNotLoggedIn,(req:express.Request,res:express.Response,next:express.NextFunction)=>{
     // passport.authenticate middleware가 로그인 전략 수행 
     // middleware인데, router middleware안에 들어가 있음 , 사용자 정의 기능추가할떄 이렇게 가능 
     // 전략 성공,실패시 call back 함수 실행 
@@ -36,21 +37,21 @@ router.post("/login",(req:express.Request,res:express.Response,next:express.Next
             return next(authError);
         }
         if(!user){
-            return res.redirect(`/?loginError=${info.message}`);
+            return res.json('/auth/login');
         }
         return req.login(user,(loginError)=>{
             if(loginError){
                 console.log(loginError);
                 return next(loginError);
             }
-            return res.redirect("/");
+            return res.json("/");
         })
         // middleware내 middleware에는 (req,res,next)를 붙인다.
     })(req,res,next);
 })
 
 
-router.get("/logout",(req,res)=>{
+router.get("/logout",isLoggedIn,(req,res)=>{
     req.logOut();
     req.session.destroy((err)=>{
         if(err) throw err;
