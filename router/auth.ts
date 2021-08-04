@@ -1,6 +1,7 @@
 import * as express from "express";
 import {resolve} from "path"
 import * as passport from "passport";
+import { session } from "passport";
 
 const router: express.Router = express.Router();
 
@@ -23,7 +24,6 @@ const isNotLoggedIn = (req:express.Request , res:express.Response,next:express.N
 }
 
 router.get("/login",isNotLoggedIn,(req :express.Request ,res:express.Response,next:express.NextFunction)=>{
-    console.log("request")
     res.sendFile(resolve(__dirname+"/../public/html/login.html"));
 })
 
@@ -39,13 +39,16 @@ router.post("/login",isNotLoggedIn,(req:express.Request,res:express.Response,nex
         if(!user){
             return res.json('/auth/login');
         }
-        return req.login(user,(loginError)=>{
+        /***
+         * 로그인후 isAuthenticated 에 true가 나와야하지만 false가 나오는 문제 
+         */
+        req.login(user,(loginError)=>{
             if(loginError){
                 console.log(loginError);
                 return next(loginError);
             }
-            return res.json("/");
         })
+        return res.json("/");
         // middleware내 middleware에는 (req,res,next)를 붙인다.
     })(req,res,next);
 })

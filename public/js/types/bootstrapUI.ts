@@ -2,7 +2,7 @@ enum Bootstrap{
     GREEN_BORDER = "is-valid",
     RED_BORDER ="is-invalid",
     GREEN_TEXT = "text-success",
-    RED_TEXT ="text-dange",
+    RED_TEXT ="text-danger",
 }
 
 export {Bootstrap};

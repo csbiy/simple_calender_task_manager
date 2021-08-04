@@ -11,10 +11,17 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
 {% endblock %}
 {% block body %}
 <div>
-    <ul class="position-fixed d-flex " style="left:70%">
-        <a href="/auth/login"><li>login</i1></a>
-        <a href="/user"><li style="margin-left: 6px;">registration</li></a>
-  
+    <ul class="position-fixed d-flex navBtnList" style="left:70%">
+        {% if not isLogin %}
+        <li class="me-3" id="loginBtn" ><a href="/auth/login">login</a></li>
+        <li class="me-3" id="registrationBtn"><a href="/user">registration</a></li>
+        {% endif %}
+
+        {% if isLogin %}    
+        <li class="me-3"> <strong>{{ name }}</strong> 님 환영합니다</li>
+        <li class="me-3"><a href="#">마이페이지</a></li>
+        <li><a href="/auth/logout">logout</a></li>
+        {% endif %}
     </ul>
 </div>
 <div class="calenderWrapper">
@@ -74,6 +81,6 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
                 {% endfor %}
             </div>
     </div>
-<script src="/js/index.js"></script>
+<script src="/js/bundle_index.js"></script>
 {% endblock %}
 

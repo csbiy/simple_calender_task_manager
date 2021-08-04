@@ -1,18 +1,13 @@
-import {  AxiosInstance } from "axios";
+import { AxiosInstance  }   from "axios";
+import { DateScrollInfo }   from "./types/DateScrollInfo";
+import { getQueryVariable } from "./utilFunction";
+const days :NodeList                      = document.querySelectorAll(".day");
+const monthBtn :NodeList                  = document.querySelectorAll(".month-api");
+const currentYear  : HTMLElement          = document.querySelector("#currentYear");
+const currentMonth :HTMLElement           = document.querySelector("#currentMonth");
+const month :HTMLElement                  = document.querySelector(".month");
+const dayOf4Weeks :number                 = 28;
 
-const days :NodeList = document.querySelectorAll(".day");
-const monthBtn :NodeList = document.querySelectorAll(".month-api");
-const currentYear  : HTMLElement= document.querySelector("#currentYear");
-const currentMonth :HTMLElement = document.querySelector("#currentMonth");
-const month :HTMLElement = document.querySelector(".month");
-const dayOf4Weeks :number = 28;
-
-interface DateScrollInfo{
-    year: number,
-    month: number,
-    direction: string,
-    lastDayOfMonth:number,
-}
 
 
 function createDay(day : number) : HTMLElement{
@@ -35,6 +30,15 @@ function createDay(day : number) : HTMLElement{
     wrapper.appendChild(div);
     return wrapper;
 }
+
+function createLogOutBtn() :HTMLLIElement{
+    let li = document.createElement("li");
+    let logoutBtn = document.createElement('a');
+    li.appendChild(logoutBtn);
+    return li;
+}
+
+
 
 days.forEach((day)=>{
     day.addEventListener("click",function(){

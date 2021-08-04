@@ -3,6 +3,7 @@ import {UserDto} from "../model/userDto";
 import * as userRepository from "../repository/userRepository";
 
 const addUser = async function(user : UserDto) :Promise<boolean>{
+        await encryptPassword(user);
         return userRepository.addUser(user);
 }
 

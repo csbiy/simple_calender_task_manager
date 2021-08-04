@@ -16,9 +16,10 @@ export class UserDto{
         this._month = parseInt(requestBody['month']);
         this._day = parseInt(requestBody['day']);   
     }
-    public static createUser(rowPacket : {name : string, password : string , year:string, month:string,day:string , [key:string]:any }) : UserDto{
-        rowPacket['emailId'] = null;
-        rowPacket['email'] = null;
+    public static createUser(rowPacket : {email:string, name : string, password : string , year:string, month:string,day:string , [key:string]:any }) : UserDto{
+        let [emailId,email] =  rowPacket["email"].trim().split("@");
+        rowPacket['emailId'] = emailId;
+        rowPacket['email']   = email;
         return new this(rowPacket as {emailId : string, email:string ,name : string, password : string , year:string, month:string,day:string;});
     }
     toString(){

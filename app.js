@@ -10,10 +10,11 @@ var schedule_1 = require("./router/schedule");
 var user_1 = require("./router/user");
 var auth_1 = require("./router/auth");
 var index_1 = require("./passport/index");
-var LocalStrategy_1 = require("./passport/LocalStrategy");
+var loginStrategyContainer_1 = require("./passport/loginStrategyContainer");
 dotenv.config();
 var app = express();
-LocalStrategy_1.passportLocalstrategy();
+// passportStrategy();
+loginStrategyContainer_1.LoginStrategy();
 index_1.passportConfig();
 nunjucks.configure("views", {
     autoescape: true,
@@ -23,6 +24,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.use(session({
+    name: "connection.sid",
     resave: false,
     saveUninitialized: false,
     secret: process.env.SECRET_KEY,
@@ -31,11 +33,11 @@ app.use(session({
         secure: false,
     }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/auth", auth_1.login);
 app.use("/user", user_1.default);
 app.use("/schedule", schedule_1.default);
-app.use(passport.initialize());
-app.use(passport.session());
 app.listen(process.env.PORT, function () {
     console.log("server executed on " + process.env.PORT);
 });
@@ -48,5 +50,17 @@ app.post("/month", function (req, res) {
 app.get("/", function (req, res) {
     var today = new Date();
     var dateDto = new dateScrollDto_1.DateScrollDto(today.getFullYear(), today.getMonth() + 1, null);
-    res.render("index.html", { dateDto: dateDto });
+    var user = req.user;
+    console.log(req.isAuthenticated());
+    if (user) {
+        res.render("index.html", { dateDto: dateDto, isLogin: req.isAuthenticated(), name: user.name });
+    }
+    else {
+        res.render("index.html", { dateDto: dateDto, isLogin: req.isAuthenticated() });
+    }
+});
+// error handler 
+app.use(function (err, req, res, next) {
+    console.log(err);
+    res.status(500).send(err);
 });

@@ -8,12 +8,13 @@ import schedule                         from "./router/schedule";
 import user                             from "./router/user"
 import {login}                          from "./router/auth";
 import {passportConfig}                 from  "./passport/index";
-import {passportLocalstrategy}          from "./passport/LocalStrategy"
-
+import {LoginStrategy}                  from "./passport/loginStrategyContainer"
+import { UserDto } from "./model/userDto";
 
 dotenv.config();    
 const app :express.Application =  express();
-passportLocalstrategy();
+// passportStrategy();
+LoginStrategy();
 
 passportConfig();
 nunjucks.configure("views",{ 
@@ -24,6 +25,7 @@ app.use(express.urlencoded())
 app.use(express.json());
 app.use(express.static(__dirname+"/public"));
 app.use(session({
+    name: "connection.sid",
     resave:false,
     saveUninitialized:false,
     secret:process.env.SECRET_KEY,
@@ -32,12 +34,12 @@ app.use(session({
         secure: false,
     }
 }))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/auth",login);
 app.use("/user",user);
 app.use("/schedule",schedule);
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 app.listen( process.env.PORT ,()=>{
@@ -54,5 +56,19 @@ app.post("/month",( req:express.Request, res: express.Response )=>{
 app.get("/",(req :express.Request,res :express.Response)=>{
     const today: Date = new Date();
     const dateDto :DateScrollDto = new DateScrollDto(today.getFullYear(),today.getMonth()+1,null);
-    res.render("index.html",{dateDto : dateDto});
+    let user = req.user as UserDto
+    console.log(req.isAuthenticated());
+    if(user){
+        res.render("index.html",{dateDto : dateDto, isLogin :req.isAuthenticated(),name:user.name});
+        
+    }else{
+        res.render("index.html",{dateDto : dateDto, isLogin :req.isAuthenticated()});
+    }
 })
+
+// error handler 
+app.use((err:any,req:express.Request,res:express.Response,next:express.NextFunction)=>{
+    console.log(err);
+    res.status(500).send(err)
+})
+
