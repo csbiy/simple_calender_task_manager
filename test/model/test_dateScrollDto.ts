@@ -12,9 +12,9 @@ describe("test_DateScrollDto",()=>{
 
         const testDto_left :DateScrollDto = new DateScrollDto(testYear,testMonth,Direction.left);
         testDto_left.changeMonthByDirection();
-        strictEqual(testDto_left.getMonth(),testMonth-1);
+        strictEqual(testDto_left.month,testMonth-1);
         testDto_left.changeMonthByDirection();
-        strictEqual(testDto_left.getMonth(),testMonth-2);
+        strictEqual(testDto_left.month,testMonth-2);
         
     })
 
@@ -22,25 +22,25 @@ describe("test_DateScrollDto",()=>{
 
         const testDto_right :DateScrollDto = new DateScrollDto(testYear,testMonth,Direction.right);
         testDto_right.changeMonthByDirection();
-        strictEqual(testDto_right.getMonth(),testMonth+1);
+        strictEqual(testDto_right.month,testMonth+1);
         testDto_right.changeMonthByDirection();
-        strictEqual(testDto_right.getMonth(),testMonth+2);
+        strictEqual(testDto_right.month,testMonth+2);
     })
 
     it("should increase Year Value when Month exceed 12 ",()=>{
         testMonth  = 12;
         const testDto_right :DateScrollDto = new DateScrollDto(testYear,testMonth,Direction.right);
         testDto_right.changeMonthByDirection();
-        strictEqual(testDto_right.getMonth(),1);
-        strictEqual(testDto_right.getYear(),testYear+1);
+        strictEqual(testDto_right.month,1);
+        strictEqual(testDto_right.year,testYear+1);
     })
 
     it("should decrease Year Value when Month lower then 1 ",()=>{
         testMonth  = 1;
         const testDto_right :DateScrollDto = new DateScrollDto(testYear,testMonth,Direction.left);
         testDto_right.changeMonthByDirection();
-        strictEqual(testDto_right.getMonth(),12);
-        strictEqual(testDto_right.getYear(),testYear-1);
+        strictEqual(testDto_right.month,12);
+        strictEqual(testDto_right.year,testYear-1);
     })
 
     it("should have last day of Month",()=>{
@@ -54,7 +54,7 @@ describe("test_DateScrollDto",()=>{
         for (let month = 1; month< testCase_2021.length +1 ; month++){
             let testDto :DateScrollDto= new DateScrollDto(testYear,month,Direction.left);
             testDto.setLastDayOfMonth();
-            strictEqual(testDto.getLastDayOfMonth(),testCase_2021[month]);
+            strictEqual(testDto.lastDayOfMonth,testCase_2021[month]);
         }
     })
 })

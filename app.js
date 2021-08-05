@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
 var dotenv = require("dotenv");
 var express = require("express");
 var nunjucks = require("nunjucks");
@@ -11,8 +12,10 @@ var user_1 = require("./router/user");
 var auth_1 = require("./router/auth");
 var index_1 = require("./passport/index");
 var loginStrategyContainer_1 = require("./passport/loginStrategyContainer");
+var path_1 = require("path");
 dotenv.config();
 var app = express();
+exports.app = app;
 // passportStrategy();
 loginStrategyContainer_1.LoginStrategy();
 index_1.passportConfig();
@@ -58,6 +61,12 @@ app.get("/", function (req, res) {
     else {
         res.render("index.html", { dateDto: dateDto, isLogin: req.isAuthenticated() });
     }
+});
+app.get("/test", function (req, res) {
+    res.send("test");
+});
+app.get("/test2", function (req, res) {
+    res.sendFile(path_1.resolve(__dirname + "/public/html/login.html"));
 });
 // error handler 
 app.use(function (err, req, res, next) {

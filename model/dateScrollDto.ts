@@ -3,55 +3,54 @@ import { Direction } from "./enum/Direction";
 
 export class DateScrollDto  {
 
-    private year:number;
-    private month:number;
-    private lastDayOfMonth:number;
-    private direction:Direction;
+    private _year:number;
+    private _month:number;
+    private _lastDayOfMonth:number;
+    private _direction:Direction;
 
     constructor(year:number,month:number,direction:string ){
-        this.year = year;
-        this.month = month;
+        this._year = year;
+        this._month = month;
         if(direction==Direction.left){
-            this.direction = Direction.left;
+            this._direction = Direction.left;
         }else{
-            this.direction = Direction.right;
+            this._direction = Direction.right;
         }
     }
 
-    public getLastDayOfMonth() : number {
-        return this.lastDayOfMonth;
+    get lastDayOfMonth() : number {
+        return this._lastDayOfMonth;
     }
 
-    public getYear() : number {
-        return this.year;
+    get year() : number {
+        return this._year;
     }
-    public getMonth() :number{
-        return this.month;
+    get month() :number{
+        return this._month;
     }
-    public getDirection(): string{
-        return this.direction;
+    get direction(): string{
+        return this._direction;
     }
     public changeMonthByDirection() : void {
-        if(this.direction == Direction.right){
-            this.month+=1;
-            if(this.month>12){
-                this.year+=1;
-                this.month=1;
+        if(this._direction == Direction.right){
+            this._month+=1;
+            if(this._month>12){
+                this._year+=1;
+                this._month=1;
             }
         }
         else if(this.direction ==  Direction.left){
-            this.month-=1;
-            if(this.month<1){
-                this.year-=1
-                this.month=12;
+            this._month-=1;
+            if(this._month<1){
+                this._year-=1
+                this._month=12;
             }
         }
     }
 
     public setLastDayOfMonth():void{
         const tmp :Date = new Date(this.year,this.month,0);
-        
-        this.lastDayOfMonth = tmp.getDate();
+        this._lastDayOfMonth = tmp.getDate();
     }
 }
 

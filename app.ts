@@ -9,7 +9,7 @@ import user                             from "./router/user"
 import {login}                          from "./router/auth";
 import {passportConfig}                 from  "./passport/index";
 import {LoginStrategy}                  from "./passport/loginStrategyContainer"
-import { UserDto } from "./model/userDto";
+import { UserDto }                      from "./model/userDto";
 
 dotenv.config();    
 const app :express.Application =  express();
@@ -46,18 +46,10 @@ app.listen( process.env.PORT ,()=>{
     console.log("server executed on " + process.env.PORT);
 })
 
-app.post("/month",( req:express.Request, res: express.Response )=>{
-    const dateDto :DateScrollDto = new DateScrollDto(Number(req.body["year"]),Number(req.body["month"]),req.body["direction"])
-    dateDto.changeMonthByDirection();
-    dateDto.setLastDayOfMonth();
-    res.json(dateDto);
-})
-
 app.get("/",(req :express.Request,res :express.Response)=>{
     const today: Date = new Date();
     const dateDto :DateScrollDto = new DateScrollDto(today.getFullYear(),today.getMonth()+1,null);
     let user = req.user as UserDto
-    console.log(req.isAuthenticated());
     if(user){
         res.render("index.html",{dateDto : dateDto, isLogin :req.isAuthenticated(),name:user.name});
         
@@ -72,3 +64,5 @@ app.use((err:any,req:express.Request,res:express.Response,next:express.NextFunct
     res.status(500).send(err)
 })
 
+
+export {app};

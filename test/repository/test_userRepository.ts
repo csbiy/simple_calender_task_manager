@@ -1,9 +1,9 @@
 import * as userRepository from "../../repository/userRepository";
 import { UserDto } from "../../model/userDto";
-import {it,describe,done} from "mocha";
+import {it,describe} from "mocha";
 import {strictEqual} from "assert";
 
-describe("test_UserRepository",
+describe("test_UserRepository",()=>{
     it("should find user by email", async ()=>{
 
         const email : string  = "email.com";
@@ -22,4 +22,6 @@ describe("test_UserRepository",
         strictEqual(foundUser.password,user.password);
         await userRepository.DeleteUserByEmail(emailId+"@"+email);
     })
+}
+    
 )

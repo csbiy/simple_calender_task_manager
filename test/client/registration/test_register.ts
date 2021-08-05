@@ -1,5 +1,5 @@
-import {InputValidator} from "../../public/js/registration/inputValidator";
-import { ValidationUI } from "../../public/js/types/validationUI";
+import {InputValidator} from "../../../public/js/registration/inputValidator";
+import { ValidationUI } from "../../../public/js/types/validationUI";
 import {describe,it,before,beforeEach} from "mocha";
 import { strictEqual } from "assert";
 
